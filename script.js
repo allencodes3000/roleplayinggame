@@ -41,5 +41,5 @@ function getDiceRollArray(diceCount) {
         </div>`;
     }
 
-    renderCharacter(hero);
-    renderCharacter(monster);
+    renderCharacter(hero)
+    renderCharacter(monster)
