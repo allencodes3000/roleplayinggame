@@ -19,13 +19,13 @@ function getDiceRollArray(diceCount) {
     }
 
     const monster = {
-        elementId: "monster",
-        name: "Orc",
-        avatar: "images/orc.png",
-        health: 10,
-        diceCount: 1
-    }
-
+            elementId: "monster",
+            name: "Orc",
+            avatar: "images/orc.png",
+            health: 10,
+            diceCount: 1
+        }
+        //render char function
     function renderCharacter(data) {
         const { elementId, name, avatar, health, diceCount } = data;
         const diceHtml = getDiceHtml(diceCount)
