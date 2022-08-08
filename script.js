@@ -3,7 +3,7 @@ function getDiceRollArray(diceCount) {
         return Math.floor(Math.random() * 6) + 1
     })
 
-
+    //get dice
     function getDiceHtml(diceCount) {
         return getDiceRollArray(diceCount).map(function(num) {
             return `<div class="dice">${num}</div>`
