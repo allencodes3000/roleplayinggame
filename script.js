@@ -9,7 +9,7 @@ function getDiceRollArray(diceCount) {
             return `<div class="dice">${num}</div>`
         }).join('')
     }
-
+    //hero object
     const hero = {
         elementId: "hero",
         name: "Wizard",
