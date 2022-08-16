@@ -10,6 +10,7 @@ function getDiceHtml(diceCount) {
     }).join('')
 }
 
+//hero
 const hero = {
     elementId: "hero",
     name: "Wizard",
