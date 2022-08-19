@@ -13,5 +13,5 @@ document.getElementById('monster').innerHTML = `<div class="character-card">
 <p class="health">health: <b> 10 </b></p>
 <div class="dice-container">
     <div class="dice"> 4 </div>
-</div>
+</div> 
 </div>`
