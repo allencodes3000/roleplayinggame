@@ -6,6 +6,8 @@ const hero = {
     diceRoll: 6
 }
 
+// monster
+
 const monster = {
     elementId: "monster",
     name: "Orc",
