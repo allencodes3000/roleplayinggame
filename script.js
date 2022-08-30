@@ -44,5 +44,6 @@ function renderCharacter(data) {
         </div>`;
 }
 
+//render
 renderCharacter(hero);
 renderCharacter(monster);
