@@ -1,49 +1,15 @@
-function getDiceRollArray(diceCount) {
-    let newDiceRolls = [];
-    for (let i = 0; i < diceCount; i++) {
-        newDiceRolls.push(Math.floor(Math.random() * 6) + 1);
-    }
-    return newDiceRolls;
+import characterData from './data.js'
+import Character from './Character.js'
+
+function attack() {
+    console.log('attack button working!')
 }
 
-function getDiceHtml(diceCount) {
-    return getDiceRollArray(diceCount).map(function(num) {
-        return `<div class="dice">${num}</div>`
-    }).join('')
+function render() {
+    document.getElementById('hero').innerHTML = wizard.getCharacterHtml();
+    document.getElementById('monster').innerHTML = orc.getCharacterHtml();
 }
-
-
-const hero = {
-    elementId: "hero",
-    name: "Wizard",
-    avatar: "images/wizard.png",
-    health: 60,
-    diceCount: 3
-}
-
-const monster = {
-    elementId: "monster",
-    name: "Orc",
-    avatar: "images/orc.png",
-    health: 10,
-    diceCount: 1
-}
-
-function renderCharacter(data) {
-    const { elementId, name, avatar, health, diceCount } = data;
-    const diceHtml = getDiceHtml(diceCount)
-
-    document.getElementById(elementId).innerHTML =
-        `<div class="character-card">
-            <h4 class="name"> ${name} </h4>
-            <img class="avatar" src="${avatar}" />
-            <div class="health">health: <b> ${health} </b></div>
-            <div class="dice-container">    
-                ${diceHtml}
-            </div>
-        </div>`;
-}
-
-//render
-renderCharacter(hero);
-renderCharacter(monster);
+document.getElementById('attack-button').addEventListener('click', attack)
+const wizard = new Character(characterData.hero)
+const orc = new Character(characterData.monster)
+render()
