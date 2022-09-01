@@ -1,8 +1,8 @@
-import characterData from './data.js'
+import characterData from './js'
 import Character from './Character.js'
 
 function attack() {
-    console.log('attack button working!')
+    render()
 }
 
 function render() {
