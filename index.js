@@ -1,5 +1,5 @@
 import characterData from './data'
-import Character from './character'
+import Character from './Character'
 
 function attack() {
     render()
