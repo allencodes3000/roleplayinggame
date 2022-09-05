@@ -1,4 +1,4 @@
-import characterData from './data'
+import characterData from './js/data'
 import Character from './Character'
 
 function attack() {
