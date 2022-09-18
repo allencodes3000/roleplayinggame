@@ -9,16 +9,6 @@ function getNewMonster() {
     return nextMonsterData ? new Character(nextMonsterData) : {}
 }
 
-/*
-Challenge
-1. Disable the user's ability to attack when a monster dies.
-2. Reneable the user's ability to attack when a new monster
-loads.
-3. When the game is over, disable the user's ability to attack.
-**hint.md for help!!**
-*/
-
-
 function attack() {
     if (!isWaiting) {
         wizard.getDiceHtml()
@@ -50,7 +40,7 @@ function endGame() {
     const endMessage = wizard.health === 0 && monster.health === 0 ?
         "No victors - all creatures are dead" :
         wizard.health > 0 ? "The Wizard Wins" :
-        "The Orc is Victorious"
+        "The monsters are Victorious"
 
     const endEmoji = wizard.health > 0 ? "🔮" : "☠️"
     setTimeout(() => {
