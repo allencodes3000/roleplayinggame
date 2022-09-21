@@ -40,4 +40,4 @@ function Character(data) {
     }
 }
 
-// export default Character
+export default Character
