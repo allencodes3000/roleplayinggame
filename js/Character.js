@@ -1,3 +1,4 @@
+//character
 import { getDiceRollArray, getDicePlaceholderHtml } from './utils.js'
 
 const getPercentage = (remainingHealth, maximumHealth) =>
