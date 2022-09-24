@@ -1,60 +1,65 @@
-import { getDiceRollArray, getDicePlaceholderHtml, getPercentage } from './utils.js'
+import characterData from './data.js'
+import Character from './Character.js'
 
-/*
-Challenge
-1. Convert the constructor function to a class.
+let monstersArray = ["orc", "demon", "goblin"]
+let isWaiting = false
 
-    Think about:
-    1. Where do properties go?
-    2. Where do Methods go?
-*/
+function getNewMonster() {
+    const nextMonsterData = characterData[monstersArray.shift()]
+    return nextMonsterData ? new Character(nextMonsterData) : {}
+}
 
+function attack() {
+    if (!isWaiting) {
+        wizard.setDiceHtml()
+        monster.setDiceHtml()
+        wizard.takeDamage(monster.currentDiceScore)
+        monster.takeDamage(wizard.currentDiceScore)
+        render()
 
-class Character {
-    constructor(data) {
-        Object.assign(this, data)
-        this.maxHealth = this.health
-        this.diceHtml = getDicePlaceholderHtml(this.diceCount)
-    }
-
-    setDiceHtml() {
-        this.currentDiceScore = getDiceRollArray(this.diceCount)
-        this.diceHtml = this.currentDiceScore.map((num) =>
-            `<div class="dice">${num}</div>`).join("")
-    }
-
-    takeDamage(attackScoreArray) {
-        const totalAttackScore = attackScoreArray.reduce((total, num) => total + num)
-        this.health -= totalAttackScore
-        if (this.health <= 0) {
-            this.dead = true
-            this.health = 0
+        if (wizard.dead) {
+            endGame()
+        } else if (monster.dead) {
+            isWaiting = true
+            if (monstersArray.length > 0) {
+                setTimeout(() => {
+                    monster = getNewMonster()
+                    render()
+                    isWaiting = false
+                }, 1500)
+            } else {
+                endGame()
+            }
         }
-    }
-
-    getHealthBarHtml() {
-        const percent = getPercentage(this.health, this.maxHealth)
-        return `<div class="health-bar-outer">
-                    <div class="health-bar-inner ${percent < 26 ? "danger" : ""}" 
-                            style="width:${percent}%;">
-                    </div>
-                </div>`
-    }
-
-    getCharacterHtml() {
-        const { elementId, name, avatar, health, diceCount, diceHtml } = this
-        const healthBar = this.getHealthBarHtml()
-        return `
-            <div class="character-card">
-                <h4 class="name"> ${name} </h4>
-                <img class="avatar" src="${avatar}" />
-                <div class="health">health: <b> ${health} </b></div>
-                ${healthBar}
-                <div class="dice-container">
-                    ${diceHtml}
-                </div>
-            </div>`
     }
 }
 
-export default Character
+function endGame() {
+    isWaiting = true
+    const endMessage = wizard.health === 0 && monster.health === 0 ?
+        "No victors - all creatures are dead" :
+        wizard.health > 0 ? "The Wizard Wins" :
+        "The monsters are Victorious"
+
+    const endEmoji = wizard.health > 0 ? "🔮" : "☠️"
+    setTimeout(() => {
+        document.body.innerHTML = `
+                <div class="end-game">
+                    <h2>Game Over</h2> 
+                    <h3>${endMessage}</h3>
+                    <p class="end-emoji">${endEmoji}</p>
+                </div>
+                `
+    }, 1500)
+}
+
+document.getElementById("attack-button").addEventListener('click', attack)
+
+function render() {
+    document.getElementById('hero').innerHTML = wizard.getCharacterHtml()
+    document.getElementById('monster').innerHTML = monster.getCharacterHtml()
+}
+
+const wizard = new Character(characterData.hero)
+let monster = getNewMonster()
+render()
