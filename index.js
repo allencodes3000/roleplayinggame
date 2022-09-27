@@ -59,6 +59,7 @@ function render() {
     document.getElementById('monster').innerHTML = monster.getCharacterHtml()
 }
 
+//new instance of wizard
 const wizard = new Character(characterData.hero)
 let monster = getNewMonster()
 render()
